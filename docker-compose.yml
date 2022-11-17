@@ -7,7 +7,7 @@ services:
     tty: true
     working_dir: /app
     volumes:
-      - ./spring_prj:/app
+      - ./demo:/app
     ports:
       - 8080:8080 # 通常実行
     depends_on:
