@@ -1,0 +1,26 @@
+services:
+  java:
+    image: openjdk:15
+    container_name: java
+    env_file:
+      - ./mysql/db.env # mysqlと同じものを指定
+    tty: true
+    working_dir: /app
+    volumes:
+      - ./spring_prj:/app
+    ports:
+      - 8080:8080 # 通常実行
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0.28
+    container_name: mysql
+    platform: linux/x86_64
+    ports:
+      - 3306:3306
+    env_file:
+      - ./mysql/db.env #MySQLの設定ファイル
+    volumes:
+      - ./mysql/mysql-data:/var/lib/mysql
+      - ./mysql:/etc/mysql/conf.d
